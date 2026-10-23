@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration du mini framework (lue avec JAXB) -->
+<beans>
+    <bean id="daoBase" class="ma.enset.demo.dao.DaoBase"/>
+    <bean id="daoCapteur" class="ma.enset.demo.dao.DaoCapteur"/>
+
+    <!-- a- injection par constructeur -->
+    <bean id="metierConstructeur" class="ma.enset.demo.metier.MetierConstructeur">
+        <constructor-arg ref="daoCapteur"/>
+    </bean>
+
+    <!-- b- injection par setter (setDao) -->
+    <bean id="metierSetter" class="ma.enset.demo.metier.MetierSetter">
+        <property name="dao" ref="daoBase"/>
+    </bean>
+
+    <!-- c- injection directe dans les attributs (référence + valeur) -->
+    <bean id="metierField" class="ma.enset.demo.metier.MetierField">
+        <field name="dao" ref="daoCapteur"/>
+        <field name="coefficient" value="10"/>
+    </bean>
+</beans>
